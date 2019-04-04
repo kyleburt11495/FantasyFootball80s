@@ -47,7 +47,7 @@ class Player(models.Model):
 		return json.loads(self.num_catches)
 
 	def set_rushing_yards(self, rushing_yards):
-		self.rushing_yards = jsom.dumps(rushing_yards)
+		self.rushing_yards = json.dumps(rushing_yards)
 	
 	def get_rushing_yards(self):
 		return json.loads(self.rushing_yards)
@@ -60,7 +60,7 @@ class Player(models.Model):
 		return json.loads(self.num_passes)
 
 	def set_passing_yards(self, rushing_yards):
-		self.passing_yards = jsom.dumps(passing_yards)
+		self.passing_yards = json.dumps(passing_yards)
 	
 	def get_passing_yards(self):
 		return json.loads(self.passing_yards)
