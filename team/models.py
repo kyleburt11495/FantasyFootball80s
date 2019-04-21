@@ -9,7 +9,7 @@ class Player(models.Model):
 
 	short_name = models.CharField(max_length=40, help_text='Enter shortened version of name')
 
-	team = models.ForeignKey('Team', on_delete=models.SET_NULL, null=True)
+	team = models.ForeignKey('FantasyTeam', on_delete=models.SET_NULL, null=True)
 
 	position = models.CharField(max_length=2, help_text='Enter player position')
 
