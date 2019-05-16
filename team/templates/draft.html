@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div id="pick_order" class="topBar">
+
+  </div>
+  <div id="main_container">
+    <div id="player_info" class="topBar">
+      
+    </div>
+    <div id="draftable_players">
+      <table id="draftable_players_table">
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Bye</th>
+          <th>Points</th>
+        </tr>
+        <player
+          v-for="player in players"
+          v-bind:key="player.id"
+          v-bind:info="player.info"> 
+        </player>
+      </table>
+    </div>
+    <div id="pick_history" class="rightSidebar">
+
+    </div>
+  </div>
+  <div class="rightSidebar">
+
+  </div>
+{% endblock %}

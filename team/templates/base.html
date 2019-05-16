@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/site_styles.css' %}">
     {% block stylesheets %} {% endblock %}
+    {% block scripts %} {% endblock %}
   </head>
-  <body>
+  <body id="app">
     {% block navbar %}
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
