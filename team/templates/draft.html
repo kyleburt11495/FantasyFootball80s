@@ -2,19 +2,25 @@
 
 {% block content %}
   <div id="pick_order" class="topBar">
-
+    
   </div>
   <div id="main_container">
-    <div id="player_info" class="topBar">
-      
-    </div>
+    <current-selected-player id="selected_player" class="topBar"></current-selected-player>
     <div id="draftable_players">
       <table id="draftable_players_table">
         <tr>
-          <th>Rank</th>
-          <th>Player</th>
-          <th>Bye</th>
-          <th>Points</th>
+          <th>RANK</th>
+          <th>PLAYER</th>
+          <th>TEAM</th>
+          <th>POS</th>
+          <th>BYE</th>
+          <th>PTS</th>
+          <th>REC</th>
+          <th>REYD</th>
+          <th>RUSH</th>
+          <th>RUYD</th>
+          <th>ATT</th>
+          <th>PAYD</th>
         </tr>
         <player
           v-for="player in players"
@@ -24,10 +30,33 @@
       </table>
     </div>
     <div id="pick_history" class="rightSidebar">
-
+      <h4>Pick History</h4>
+      <table>
+        <tr>
+          <th>PK</th>
+          <th>Player</th>
+        </tr>
+        <picked-player
+          v-for="picked-player in picked-players"
+          v-bind:key="picked-player.id"
+          v-bind:info="player.info">
+        </picked-player>
+      </table>
     </div>
   </div>
-  <div class="rightSidebar">
-
+  <div id="draft_results" class="rightSidebar">
+    <h4>Draft Results</h4>
+    <table>
+      <tr>
+        <th>POS</th>
+        <th>Player</th>
+        <th>Bye</th>
+      </tr>
+      <current-team-player
+        v-for="current-team-player in current-team.players"
+        v-bind:key="current-team-player.id"
+        v-bind:info="player.info">
+      </current-team-player>
+    </table>
   </div>
 {% endblock %}

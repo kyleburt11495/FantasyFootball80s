@@ -4,6 +4,7 @@ import json
 # Create your models here.
 
 class Player(models.Model):
+	id = models.CharField(primary_key=True, max_length=100)
 
 	full_name = models.CharField(max_length=100, help_text='Enter full name')
 
@@ -11,7 +12,11 @@ class Player(models.Model):
 
 	team = models.ForeignKey('FantasyTeam', on_delete=models.SET_NULL, null=True)
 
+	season = models.ForeignKey('Season', on_delete=models.SET_NULL, null=True)
+
 	position = models.CharField(max_length=2, help_text='Enter player position')
+
+	bye_week = models.IntegerField(max_length=2, help_text="Enter player's bye week")
 
 	num_catches = models.CharField(max_length=500)
 
@@ -59,135 +64,18 @@ class Player(models.Model):
 	def get_num_passes(self):
 		return json.loads(self.num_passes)
 
-	def set_passing_yards(self, rushing_yards):
+	def set_passing_yards(self, passing_yards):
 		self.passing_yards = json.dumps(passing_yards)
 	
 	def get_passing_yards(self):
 		return json.loads(self.passing_yards)
-	"""
-	week1_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week2_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week3_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week4_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week5_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week6_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week7_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week8_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week9_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week10_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week11_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week12_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week13_points = models.DecimalField(max_digits=5, decimal_places=2)
-	wee14_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week15_points = models.DecimalField(max_digits=5, decimal_places=2)
-	week16_points = models.DecimalField(max_digits=5, decimal_places=2)
-
-	week1_catches_amount = models.IntegerField(max_digits=3)
-	week2_catches_amount = models.IntegerField(max_digits=3)
-	week3_catches_amount = models.IntegerField(max_digits=3)
-	week4_catches_amount = models.IntegerField(max_digits=3)
-	week5_catches_amount = models.IntegerField(max_digits=3)
-	week6_catches_amount = models.IntegerField(max_digits=3)
-	week7_catches_amount = models.IntegerField(max_digits=3)
-	week8_catches_amount = models.IntegerField(max_digits=3)
-	week9_catches_amount = models.IntegerField(max_digits=3)
-	week10_catches_amount = models.IntegerField(max_digits=3)
-	week11_catches_amount = models.IntegerField(max_digits=3)
-	week12_catches_amount = models.IntegerField(max_digits=3)
-	week13_catches_amount = models.IntegerField(max_digits=3)
-	week14_catches_amount = models.IntegerField(max_digits=3)
-	week15_catches_amount = models.IntegerField(max_digits=3)
-	week16_catches_amount = models.IntegerField(max_digits=3)
-
-	week1_catches_yards = models.IntegerField(max_digits=3)
-	week2_catches_yards = models.IntegerField(max_digits=3)
-	week3_catches_yards = models.IntegerField(max_digits=3)
-	week4_catches_yards = models.IntegerField(max_digits=3)
-	week5_catches_yards = models.IntegerField(max_digits=3)
-	week6_catches_yards = models.IntegerField(max_digits=3)
-	week7_catches_yards = models.IntegerField(max_digits=3)
-	week8_catches_yards = models.IntegerField(max_digits=3)
-	week9_catches_yards = models.IntegerField(max_digits=3)
-	week10_catches_yards = models.IntegerField(max_digits=3)
-	week11_catches_yards = models.IntegerField(max_digits=3)
-	week12_catches_yards = models.IntegerField(max_digits=3)
-	week13_catches_yards = models.IntegerField(max_digits=3)
-	week14_catches_yards = models.IntegerField(max_digits=3)
-	week15_catches_yards = models.IntegerField(max_digits=3)
-	week16_catches_yards = models.IntegerField(max_digits=3)
-
-	week1_rushes_amount = models.IntegerField(max_digits=3)
-	week2_rushes_amount = models.IntegerField(max_digits=3)
-	week3_rushes_amount = models.IntegerField(max_digits=3)
-	week4_rushes_amount = models.IntegerField(max_digits=3)
-	week5_rushes_amount = models.IntegerField(max_digits=3)
-	week6_rushes_amount = models.IntegerField(max_digits=3)
-	week7_rushes_amount = models.IntegerField(max_digits=3)
-	week8_rushes_amount = models.IntegerField(max_digits=3)
-	week9_rushes_amount = models.IntegerField(max_digits=3)
-	week10_rushes_amount = models.IntegerField(max_digits=3)
-	week11_rushes_amount = models.IntegerField(max_digits=3)
-	week12_rushes_amount = models.IntegerField(max_digits=3)
-	week13_rushes_amount = models.IntegerField(max_digits=3)
-	week14_rushes_amount = models.IntegerField(max_digits=3)
-	week15_rushes_amount = models.IntegerField(max_digits=3)
-	week16_rushes_amount = models.IntegerField(max_digits=3)
-
-	week1_rushes_yards = models.IntegerField(max_digits=3)
-	week2_rushes_yards = models.IntegerField(max_digits=3)
-	week3_rushes_yards = models.IntegerField(max_digits=3)
-	week4_rushes_yards = models.IntegerField(max_digits=3)
-	week5_rushes_yards = models.IntegerField(max_digits=3)
-	week6_rushes_yards = models.IntegerField(max_digits=3)
-	week7_rushes_yards = models.IntegerField(max_digits=3)
-	week8_rushes_yards = models.IntegerField(max_digits=3)
-	week9_rushes_yards = models.IntegerField(max_digits=3)
-	week10_rushes_yards = models.IntegerField(max_digits=3)
-	week11_rushes_yards = models.IntegerField(max_digits=3)
-	week12_rushes_yards = models.IntegerField(max_digits=3)
-	week13_rushes_yards = models.IntegerField(max_digits=3)
-	week14_rushes_yards = models.IntegerField(max_digits=3)
-	week15_rushes_yards = models.IntegerField(max_digits=3)
-	week16_rushes_yards = models.IntegerField(max_digits=3)
-
-	week1_passing_amounts = models.IntegerField(max_digits=3)
-	week2_passing_amounts = models.IntegerField(max_digits=3)
-	week3_passing_amounts = models.IntegerField(max_digits=3)
-	week4_passing_amounts = models.IntegerField(max_digits=3)
-	week5_passing_amounts = models.IntegerField(max_digits=3)
-	week6_passing_amounts = models.IntegerField(max_digits=3)
-	week7_passing_amounts = models.IntegerField(max_digits=3)
-	week8_passing_amounts = models.IntegerField(max_digits=3)
-	week9_passing_amounts = models.IntegerField(max_digits=3)
-	week10_passing_amounts = models.IntegerField(max_digits=3)
-	week11_passing_amounts = models.IntegerField(max_digits=3)
-	week12_passing_amounts = models.IntegerField(max_digits=3)
-	week13_passing_amounts = models.IntegerField(max_digits=3)
-	week14_passing_amounts = models.IntegerField(max_digits=3)
-	week15_passing_amounts = models.IntegerField(max_digits=3)
-	week16_passing_amounts = models.IntegerField(max_digits=3)
-
-	week1_passing_yards = models.IntegerField(max_digits=3)
-	week2_passing_yards = models.IntegerField(max_digits=3)
-	week3_passing_yards = models.IntegerField(max_digits=3)
-	week4_passing_yards = models.IntegerField(max_digits=3)
-	week5_passing_yards = models.IntegerField(max_digits=3)
-	week6_passing_yards = models.IntegerField(max_digits=3)
-	week7_passing_yards = models.IntegerField(max_digits=3)
-	week8_passing_yards = models.IntegerField(max_digits=3)
-	week9_passing_yards = models.IntegerField(max_digits=3)
-	week10_passing_yards = models.IntegerField(max_digits=3)
-	week11_passing_yards = models.IntegerField(max_digits=3)
-	week12_passing_yards = models.IntegerField(max_digits=3)
-	week13_passing_yards = models.IntegerField(max_digits=3)
-	week14_passing_yards = models.IntegerField(max_digits=3)
-	week15_passing_yards = models.IntegerField(max_digits=3)
-	week16_passing_yards = models.IntegerField(max_digits=3)
-	"""
+	
 class League(models.Model):
 	league_name = models.CharField(max_length=30, help_text='Enter a league name')
 
 	league_type = models.CharField(max_length=10, help_text='Enter a league scoring type')
+
+	season = models.ForeignKey('Season', on_delete=models.SET_NULL, null=True)
 
 class User(models.Model):
 	user_name = models.CharField(max_length=50, help_text='Enter full name of user')
@@ -204,9 +92,14 @@ class FantasyTeam(models.Model):
 class PlayerInstance(models.Model):
 	player = models.ForeignKey(Player, on_delete=models.SET_NULL, null=True)
 
+	league = models.ForeignKey(League, on_delete=models.SET_NULL, null=True)
+
 	fantasy_team = models.ForeignKey(FantasyTeam, on_delete=models.SET_NULL, null=True)
 
 	is_on_waivers = models.BooleanField(default=True)
+
+class Season(models.Model):
+	year = models.IntegerField(primary_key=True, max_length=4)
 
 
 
